@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MazeBug" default="run"> 
+    <property name="jar.path" value="./gridworld.jar" />
+    <target name="clean">
+        <delete file="MazeBug.class" quiet="true" />
+        <delete file="MazeBugRunner.class" quiet="true" />
+    </target>
+
+    <target name="compileRunner" depends="clean">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="MazeBugRunner.java" includeantruntime="false"/> 
+    </target> 
+
+    <target name="compile" depends="compileRunner">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="MazeBug.java" includeantruntime="false" />
+    </target>
+    
+    <target name="run" depends="compile">
+        <java classname="MazeBugRunner" fork="true">
+            <classpath>
+                <pathelement location="${jar.path}" />
+                <pathelement location="." />
+            </classpath>
+        </java>
+    </target>
+</project>

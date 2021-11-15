@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ImageReader" default="run">
+	<property name="build.path" location="build/classes"/>
+	<property name="jar.path" location="jar"/>
+
+	<path id="compile.path">
+        <fileset dir="${jar.path}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <pathelement path="${build.path}"/>
+    </path>
+
+	<target name="clean">
+		<delete dir="build"/>
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${build.path}"/>
+		<javac classpathref="compile.path" srcdir="./src" destdir="${build.path}" includeantruntime="false"/>
+	</target>
+	
+	<target name="run" depends="compile">
+		<java classname="ImageReaderRunner" classpathref="compile.path" fork="true"/>
+	</target>
+
+	<target name="junit" depends="compile">
+		<junit printsummary="true" fork="true" haltonfailure="false" showoutput="true">
+			<classpath refid="compile.path"/>
+			<test name="ImageProcessorTest" />
+			<formatter type="plain" usefile="false" />
+		</junit>
+	</target>
+</project>
