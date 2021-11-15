@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CirlceBug" default="run"> 
+    <property name="jar.path" value="./gridworld.jar" />
+    <target name="clean">
+        <delete file="CircleBug.class" quiet="true" />
+        <delete file="CircleBugRunner.class" quiet="true" />
+    </target>
+
+    <target name="compileRunner" depends="clean">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." excludes="*Runner.java" includeantruntime="false"/> 
+    </target> 
+
+    <target name="compile" depends="compileRunner">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." excludes="*Bug.java" includeantruntime="false" />
+    </target>
+    
+    <target name="run" depends="compile">
+        <java classname="CircleBugRunner" fork="true">
+            <classpath>
+                <pathelement location="${jar.path}" />
+                <pathelement location="." />
+            </classpath>
+        </java>
+    </target>
+</project>
