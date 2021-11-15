@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SparseBoundedGrid2" default="run"> 
+    <property name="jar.path" value="./gridworld.jar" />
+    
+    <target name="clean">
+        <delete file="SparseBoundedGrid2.class" quiet="true" />
+        <delete file="SparseBoundedGrid2Runner.class" quiet="true" />
+    </target>
+    
+    <target name="compileRunner" depends="clean">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="SparseBoundedGrid2Runner.java" includeantruntime="false"/> 
+    </target> 
+
+    <target name="compile" depends="compileRunner">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="SparseBoundedGrid2.java" includeantruntime="false" />
+    </target>
+    
+    <target name="run" depends="compile">
+        <java classname="SparseBoundedGrid2Runner" fork="true">
+            <classpath>
+                <pathelement location="${jar.path}" />
+                <pathelement location="." />
+            </classpath>
+        </java>
+    </target>
+</project>

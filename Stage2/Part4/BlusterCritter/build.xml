@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BlusterCritter" default="run"> 
+    <property name="jar.path" value="./gridworld.jar" />
+    <target name="clean">
+        <delete file="BlusterCritter.class" quiet="true" />
+        <delete file="BlusterCritterRunner.class" quiet="true" />
+    </target>
+
+    <target name="compileRunner" depends="clean">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="BlusterCritterRunner.java" includeantruntime="false"/> 
+    </target> 
+
+    <target name="compile" depends="compileRunner">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="BlusterCritter.java" includeantruntime="false" />
+    </target>
+    
+    <target name="run" depends="compile">
+        <java classname="BlusterCritterRunner" fork="true">
+            <classpath>
+                <pathelement location="${jar.path}" />
+                <pathelement location="." />
+            </classpath>
+        </java>
+    </target>
+</project>

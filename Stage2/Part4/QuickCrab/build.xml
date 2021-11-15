@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="QuickCrab" default="run"> 
+    <property name="jar.path" value="./gridworld.jar" />
+    <target name="clean">
+        <delete file="QuickCrab.class" quiet="true" />
+        <delete file="QuickCrabRunner.class" quiet="true" />
+        <delete file="CrabCritter.class" quiet="true" />
+    </target>
+
+    <target name="compileRunner" depends="clean">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="QuickCrabRunner.java" includeantruntime="false"/> 
+    </target> 
+
+    <target name="compile" depends="compileRunner">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="QuickCrab.java" includeantruntime="false" />
+    </target>
+    
+    <target name="run" depends="compile">
+        <java classname="QuickCrabRunner" fork="true">
+            <classpath>
+                <pathelement location="${jar.path}" />
+                <pathelement location="." />
+            </classpath>
+        </java>
+    </target>
+</project>

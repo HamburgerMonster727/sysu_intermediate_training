@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SparseBoundedGrid" default="run"> 
+    <property name="jar.path" value="./gridworld.jar" />
+    
+    <target name="clean">
+        <delete file="SparseBoundedGrid.class" quiet="true" />
+        <delete file="SparseBoundedGridRunner.class" quiet="true" />
+        <delete file="OccupantInCol.class" quiet="true" />
+    </target>
+    
+    <target name="compileRunner" depends="clean">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="SparseBoundedGridRunner.java" includeantruntime="false"/> 
+    </target> 
+
+    <target name="compile" depends="compileRunner">
+        <javac classpath="${jar.path}" srcdir="./src" destdir="." includes="SparseBoundedGrid.java" includeantruntime="false" />
+    </target>
+    
+    <target name="run" depends="compile">
+        <java classname="SparseBoundedGridRunner" fork="true">
+            <classpath>
+                <pathelement location="${jar.path}" />
+                <pathelement location="." />
+            </classpath>
+        </java>
+    </target>
+</project>
